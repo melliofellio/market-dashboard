@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1c5cab">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<title>Market Dashboard</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+    --grid: #e1e0d9; --border: rgba(11,11,11,.10); --series: #2a78d6; --series-soft: rgba(42,120,214,.12);
+    --good: #006300; --bad: #d03b3b; --warn: #8a5a00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --border: rgba(255,255,255,.10); --series: #3987e5; --series-soft: rgba(57,135,229,.16);
+      --good: #0ca30c; --bad: #e66767; --warn: #fab219;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --border: rgba(255,255,255,.10); --series: #3987e5; --series-soft: rgba(57,135,229,.16);
+    --good: #0ca30c; --bad: #e66767; --warn: #fab219;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--page); color: var(--ink);
+         font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 14px 14px 40px; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+  h1 { font-size: 1.25rem; margin: 0; }
+  .stamp { color: var(--ink2); font-size: .85rem; }
+  button.theme { background: none; border: 1px solid var(--border); color: var(--ink2); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: .8rem; cursor: pointer; }
+  h2 { font-size: 1.05rem; margin: 26px 0 2px; }
+  .blurb { color: var(--ink2); font-size: .85rem; margin: 0 0 10px; }
+  .sumline { font-size: .8rem; color: var(--ink2); margin: 0 0 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .banner { border: 1px solid var(--border); border-left: 4px solid var(--warn); background: var(--surface); border-radius: 8px; padding: 10px 12px; margin: 8px 0; font-size: .88rem; }
+  .banner.err { border-left-color: var(--bad); }
+  .banner summary { cursor: pointer; font-weight: 600; }
+  .banner ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink2); }
+  /* assessment */
+  .a-head { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .a-title { font-size: .8rem; color: var(--ink2); text-transform: uppercase; letter-spacing: .04em; }
+  select { background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; font: inherit; font-size: .8rem; max-width: 100%; }
+  .headline { font-size: 1.2rem; font-weight: 650; margin: 2px 0 8px; line-height: 1.3; }
+  .read { margin: 0 0 12px; }
+  .a-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px 18px; }
+  .a-item h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--ink2); margin: 0 0 2px; }
+  .a-item p { margin: 0; font-size: .9rem; }
+  .a-note { color: var(--muted); font-size: .78rem; margin-top: 10px; }
+  /* tiles */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 12px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px 9px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .tile.stale { border-style: dashed; }
+  .t-name { font-size: .78rem; color: var(--ink2); line-height: 1.25; min-height: 2.5em; }
+  .t-val { font-size: 1.5rem; font-weight: 650; letter-spacing: -.01em; }
+  .t-chg { font-size: .8rem; color: var(--ink2); }
+  .t-chg b { font-weight: 600; color: var(--ink); }
+  .pill { display: inline-block; font-size: .72rem; border: 1px solid var(--border); border-radius: 999px; padding: 0 7px; margin-top: 2px; width: fit-content; }
+  .pill.better { color: var(--good); } .pill.worse { color: var(--bad); } .pill.flat { color: var(--ink2); }
+  .pill.stale { color: var(--warn); }
+  svg.spark { width: 100%; height: auto; display: block; margin-top: 2px; touch-action: pan-y; }
+  .t-meta { font-size: .72rem; color: var(--muted); }
+  details.about { margin-top: 2px; }
+  details.about summary { font-size: .72rem; color: var(--ink2); cursor: pointer; list-style: none; }
+  details.about summary::-webkit-details-marker { display: none; }
+  details.about summary::before { content: "+ "; }
+  details[open].about summary::before { content: "\2212  "; }
+  .about-body { font-size: .78rem; color: var(--ink2); padding-top: 4px; }
+  .about-body p { margin: 0 0 4px; }
+  .about-body table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; margin-top: 4px; }
+  .about-body td { padding: 1px 0; border-top: 1px solid var(--grid); }
+  .about-body td:last-child { text-align: right; }
+  /* calendar + notes */
+  .cal { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 14px; font-size: .88rem; }
+  .cal div { display: flex; gap: 10px; }
+  .cal div span { color: var(--ink2); flex: 0 0 96px; }
+  .notes { font-size: .85rem; color: var(--ink2); }
+  .notes li { margin-bottom: 4px; }
+  footer { margin-top: 28px; color: var(--muted); font-size: .75rem; }
+  #tip { position: fixed; z-index: 10; pointer-events: none; background: var(--ink); color: var(--page); font-size: .75rem; padding: 4px 8px; border-radius: 6px; display: none; white-space: nowrap; }
+  @media (max-width: 520px) {
+    .wrap { padding: 10px 10px 36px; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .t-val { font-size: 1.3rem; }
+    .headline { font-size: 1.08rem; }
+  }
+  @media (forced-colors: active) { .tile.stale { border-style: dashed; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Market Dashboard</h1>
+    <div class="stamp" id="stamp">Loading&hellip;</div>
+    <button class="theme" id="themeBtn" type="button" aria-label="Switch colour theme">Theme: auto</button>
+  </header>
+  <div id="banners"></div>
+  <section id="assessment"></section>
+  <div id="sections"></div>
+  <section>
+    <h2>Coming up (next 3 weeks)</h2>
+    <p class="blurb">Scheduled release dates from the Federal Reserve Bank of St. Louis (FRED). Dates can move.</p>
+    <div class="card"><div class="cal" id="cal"></div></div>
+  </section>
+  <section>
+    <h2>Not on this page, and why</h2>
+    <div class="card notes"><ul>
+      <li><b>Fed rate-hike odds (CME FedWatch):</b> no free authoritative feed. Stand-in shown: 2-year yield minus Fed funds.</li>
+      <li><b>MOVE index (bond volatility):</b> licensed data. Stand-in shown: 20-day volatility of daily 10-year yield moves.</li>
+      <li><b>Market breadth (% of stocks above 200-day average, advance/decline):</b> no clean free source. Stand-in shown: equal-weight vs cap-weight S&amp;P and small caps vs large caps.</li>
+      <li><b>Hedge-fund positioning, fund flows, put/call ratio:</b> paid or unreliable to scrape. Left out rather than faked.</li>
+    </ul></div>
+  </section>
+  <footer id="foot"></footer>
+</div>
+<div id="tip" role="tooltip"></div>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var tip = $("tip");
+
+  // ---------- theme ----------
+  var themeBtn = $("themeBtn");
+  var themes = ["auto", "light", "dark"];
+  function getTheme() { try { return localStorage.getItem("theme") || "auto"; } catch (e) { return "auto"; } }
+  function applyTheme(t) {
+    if (t === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+    themeBtn.textContent = "Theme: " + t;
+  }
+  applyTheme(getTheme());
+  themeBtn.addEventListener("click", function () {
+    var next = themes[(themes.indexOf(getTheme()) + 1) % 3];
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    applyTheme(next);
+  });
+
+  // ---------- helpers ----------
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === "class") el.className = attrs[k]; else if (k === "text") el.textContent = attrs[k]; else el.setAttribute(k, attrs[k]);
+    }
+    for (var i = 2; i < arguments.length; i++) {
+      var c = arguments[i]; if (c == null) continue;
+      el.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    }
+    return el;
+  }
+  function num(v, dec) { return v == null ? "n/a" : Number(v).toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+  function val(r, v) { return (r.pre || "") + num(v, r.dec) + (r.suf || ""); }
+  function sgn(x, d, mult, suf) {            // signed text from the ROUNDED value, so tiny moves never show "-0"
+    var r = Number((x * (mult || 1)).toFixed(d));
+    var t = (r > 0 ? "+" : "") + r.toFixed(d) + (suf || "");
+    return { arrow: r > 0 ? "\u25B2" : r < 0 ? "\u25BC" : "\u25AC", text: r === 0 ? (0).toFixed(d) + (suf || "") : t };
+  }
+  function fmtChg(r, chg, pctv) {
+    if (r.chg_kind === "bp") return sgn(chg, 0, 100, " bp");
+    if (r.chg_kind === "pct" && pctv != null) return sgn(pctv, 2, 1, "%");
+    return sgn(chg, Math.max(r.dec, 1), 1, "");
+  }
+  function chgText(r) {
+    if (r.chg == null) return null;
+    var c = fmtChg(r, r.chg, r.chg_pct);
+    return c.arrow + " " + c.text;
+  }
+  function wtdText(r) {
+    var w = r.wtd; if (!w) return null;
+    return (w.complete ? "Week " : "Week-to-date ") + fmtChg(r, w.chg, w.pct).text;
+  }
+  var perLabel = { d: "day", w: "week", m: "month", q: "quarter" };
+
+  // ---------- sparkline with hover ----------
+  var W = 160, H = 40, PAD = 4;
+  function spark(r) {
+    var v = r.v, n = v.length;
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("class", "spark");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", r.name + " trend over the last " + n + " observations");
+    if (n < 2) return svg;
+    var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v);
+    if (hi === lo) { hi += 1; lo -= 1; }
+    function x(i) { return PAD + (W - 2 * PAD) * i / (n - 1); }
+    function y(val) { return H - PAD - (H - 2 * PAD) * (val - lo) / (hi - lo); }
+    var pts = v.map(function (val, i) { return x(i).toFixed(1) + "," + y(val).toFixed(1); }).join(" ");
+    var area = document.createElementNS(svg.namespaceURI, "polygon");
+    area.setAttribute("points", PAD + "," + (H - PAD) + " " + pts + " " + (W - PAD) + "," + (H - PAD));
+    area.setAttribute("fill", "var(--series-soft)");
+    var line = document.createElementNS(svg.namespaceURI, "polyline");
+    line.setAttribute("points", pts); line.setAttribute("fill", "none"); line.setAttribute("stroke", "var(--series)");
+    line.setAttribute("stroke-width", "2"); line.setAttribute("stroke-linejoin", "round"); line.setAttribute("stroke-linecap", "round");
+    var dot = document.createElementNS(svg.namespaceURI, "circle");
+    dot.setAttribute("cx", x(n - 1)); dot.setAttribute("cy", y(v[n - 1])); dot.setAttribute("r", 3);
+    dot.setAttribute("fill", "var(--series)"); dot.setAttribute("stroke", "var(--surface)"); dot.setAttribute("stroke-width", 2);
+    var cross = document.createElementNS(svg.namespaceURI, "line");
+    cross.setAttribute("y1", 0); cross.setAttribute("y2", H); cross.setAttribute("stroke", "var(--muted)");
+    cross.setAttribute("stroke-width", 1); cross.style.display = "none";
+    var hot = document.createElementNS(svg.namespaceURI, "circle");
+    hot.setAttribute("r", 3.5); hot.setAttribute("fill", "var(--series)"); hot.setAttribute("stroke", "var(--surface)");
+    hot.setAttribute("stroke-width", 2); hot.style.display = "none";
+    var hit = document.createElementNS(svg.namespaceURI, "rect");
+    hit.setAttribute("x", 0); hit.setAttribute("y", 0); hit.setAttribute("width", W); hit.setAttribute("height", H);
+    hit.setAttribute("fill", "transparent");
+    [area, line, dot, cross, hot, hit].forEach(function (e) { svg.appendChild(e); });
+    function move(ev) {
+      var rect = svg.getBoundingClientRect();
+      var px = (ev.clientX - rect.left) / rect.width * W;
+      var i = Math.round((px - PAD) / (W - 2 * PAD) * (n - 1));
+      i = Math.max(0, Math.min(n - 1, i));
+      cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.style.display = "";
+      hot.setAttribute("cx", x(i)); hot.setAttribute("cy", y(v[i])); hot.style.display = "";
+      tip.textContent = r.d[i] + "  " + val(r, v[i]);
+      tip.style.display = "block";
+      var tx = Math.min(window.innerWidth - tip.offsetWidth - 6, Math.max(6, ev.clientX - tip.offsetWidth / 2));
+      tip.style.left = tx + "px"; tip.style.top = (rect.top - 30) + "px";
+    }
+    function out() { cross.style.display = "none"; hot.style.display = "none"; tip.style.display = "none"; }
+    hit.addEventListener("pointermove", move); hit.addEventListener("pointerdown", move);
+    hit.addEventListener("pointerleave", out); hit.addEventListener("pointercancel", out);
+    return svg;
+  }
+
+  // ---------- tile ----------
+  function tile(r) {
+    var t = h("article", { class: "tile" + (r.stale ? " stale" : ""), "aria-label": r.name });
+    t.appendChild(h("div", { class: "t-name", text: r.name }));
+    t.appendChild(h("div", { class: "t-val", text: val(r, r.value) }));
+    var ct = chgText(r);
+    var line = h("div", { class: "t-chg" });
+    if (ct) { line.appendChild(h("b", { text: ct })); line.appendChild(document.createTextNode(" vs prior " + perLabel[r.freq])); }
+    t.appendChild(line);
+    var wt = wtdText(r);
+    if (wt) t.appendChild(h("div", { class: "t-chg", text: wt }));
+    if (r.trend) {
+      var label = r.trend === "better" ? "✓ improving" : r.trend === "worse" ? "✗ worsening" : "– flat";
+      t.appendChild(h("span", { class: "pill " + r.trend, text: label + " (" + r.trend_label + ")" }));
+    }
+    if (r.stale) t.appendChild(h("span", { class: "pill stale", text: r.carried_forward ? "! carried forward" : "! stale data" }));
+    t.appendChild(spark(r));
+    t.appendChild(h("div", { class: "t-meta", text: "as of " + r.asof }));
+
+    var body = h("div", { class: "about-body" });
+    body.appendChild(h("p", { text: r.desc }));
+    body.appendChild(h("p", { text: "Source: " + r.src }));
+    if (r.pctile != null) body.appendChild(h("p", { text: "Higher than " + r.pctile + "% of its last " + r.pctile_n + " readings." }));
+    if (r.range52 && r.range52.pos != null) body.appendChild(h("p", { text: "52-week range: " + val(r, r.range52.lo) + " to " + val(r, r.range52.hi) + " (now at " + Math.round(r.range52.pos * 100) + "% of range)." }));
+    (r.extra || []).forEach(function (e) { body.appendChild(h("p", { text: e.k + ": " + e.v })); });
+    if (r.fetch_error) body.appendChild(h("p", { text: "Last fetch error: " + r.fetch_error }));
+    var tbl = h("table"), start = Math.max(0, r.v.length - 8);
+    for (var i = r.v.length - 1; i >= start; i--) tbl.appendChild(h("tr", null, h("td", { text: r.d[i] }), h("td", { text: val(r, r.v[i]) })));
+    body.appendChild(tbl);
+    t.appendChild(h("details", { class: "about" }, h("summary", { text: "Details" }), body));
+    return t;
+  }
+
+  // ---------- assessment ----------
+  var LABELS = [["leading", "Leading"], ["coincident", "Coincident"], ["lagging", "Lagging"], ["disagreements", "Where signals disagree"],
+                ["flows", "Money flow and psychology"], ["week", "Weekly close"], ["watch", "Watch next"], ["trap", "Behavioral trap"], ["caveats", "Data caveats"]];
+  function renderAssessment(list, data) {
+    var box = $("assessment"); box.textContent = "";
+    var card = h("div", { class: "card" });
+    var sel = h("select", { "aria-label": "Choose assessment date" });
+    list.forEach(function (a, i) { sel.appendChild(h("option", { value: i, text: a.generated_ct + (i === 0 ? " (latest)" : "") })); });
+    card.appendChild(h("div", { class: "a-head" }, h("div", { class: "a-title", text: "Daily assessment (drawn only from the data below)" }), list.length ? sel : null));
+    var content = h("div"); card.appendChild(content);
+    function show(i) {
+      content.textContent = "";
+      var a = list[i], c = a.content;
+      content.appendChild(h("div", { class: "headline", text: c.headline || "" }));
+      if (c.read) content.appendChild(h("p", { class: "read", text: c.read }));
+      var grid = h("div", { class: "a-grid" });
+      LABELS.forEach(function (p) { if (c[p[0]]) grid.appendChild(h("div", { class: "a-item" }, h("h3", { text: p[1] }), h("p", { text: c[p[0]] }))); });
+      content.appendChild(grid);
+      content.appendChild(h("div", { class: "a-note", text: "Written " + a.generated_ct + " (" + a.session + " run) by " + a.model + ". Analysis of the indicators only; not investment advice." }));
+    }
+    if (!list.length) {
+      var err = data && data.health && data.health.assessment_error;
+      content.appendChild(h("p", { text: err ? "No assessment yet: " + err : "No assessment yet. It appears after the first successful run with an Anthropic key set." }));
+    } else {
+      show(0); sel.addEventListener("change", function () { show(+sel.value); });
+      var err2 = data && data.health && data.health.assessment_error;
+      if (err2) content.appendChild(h("div", { class: "a-note", text: "Latest run could not write a new assessment (" + err2 + "). Showing the previous one." }));
+    }
+    box.appendChild(card);
+  }
+
+  // ---------- main render ----------
+  function render(data, assessments) {
+    var gen = new Date(data.generated_utc);
+    $("stamp").textContent = "Updated " + data.generated_ct + " · " + data.session;
+
+    var ban = $("banners"); ban.textContent = "";
+    var ageH = (Date.now() - gen.getTime()) / 3600000;
+    if (ageH > 36) ban.appendChild(h("div", { class: "banner err", text: "This page has not refreshed in " + Math.round(ageH) + " hours. The scheduled job may be failing; check the Actions tab on GitHub." }));
+    var hl = data.health;
+    if (hl.stale.length) {
+      var d1 = h("details", { class: "banner" }, h("summary", { text: hl.stale.length + " indicator(s) are stale or carried forward (dashed border)" }));
+      var ul = h("ul"); hl.stale.forEach(function (s) { ul.appendChild(h("li", { text: s.name + " (last data " + s.asof + ")" })); });
+      d1.appendChild(ul); ban.appendChild(d1);
+    }
+    if (hl.failed.length) {
+      var d2 = h("details", { class: "banner err" }, h("summary", { text: hl.failed.length + " source(s) failed on the last run" }));
+      var ul2 = h("ul"); hl.failed.forEach(function (s) { ul2.appendChild(h("li", { text: s.name + ": " + s.error })); });
+      d2.appendChild(ul2); ban.appendChild(d2);
+    }
+
+    renderAssessment(assessments, data);
+
+    var host = $("sections"); host.textContent = "";
+    data.sections.forEach(function (s) {
+      var rows = data.indicators.filter(function (r) { return r.section === s.id; });
+      if (!rows.length) return;
+      var sec = h("section");
+      sec.appendChild(h("h2", { text: s.title }));
+      sec.appendChild(h("p", { class: "blurb", text: s.blurb }));
+      var judged = rows.filter(function (r) { return r.trend; });
+      if (judged.length) {
+        var worse = judged.filter(function (r) { return r.trend === "worse"; }).length;
+        var better = judged.filter(function (r) { return r.trend === "better"; }).length;
+        sec.appendChild(h("p", { class: "sumline", text: "Direction over each indicator's own window: " + better + " improving, " + worse + " worsening, " + (judged.length - better - worse) + " flat (of " + judged.length + "). Direction only; not a forecast." }));
+      }
+      var g = h("div", { class: "grid" });
+      rows.forEach(function (r) { g.appendChild(tile(r)); });
+      sec.appendChild(g); host.appendChild(sec);
+    });
+
+    var cal = $("cal"); cal.textContent = "";
+    if (!data.calendar.length) cal.appendChild(h("div", { text: "No scheduled releases found." }));
+    data.calendar.forEach(function (e) {
+      var d = new Date(e.date + "T12:00:00");
+      cal.appendChild(h("div", null, h("span", { text: d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) }), e.event));
+    });
+    $("foot").textContent = "Each number comes from one named source and carries its own as-of date; nothing is blended or estimated. Refreshes after the US close and again the next morning to pick up lagged series. Times in US Central.";
+  }
+
+  function load(path) {
+    return fetch(path + "?t=" + Date.now(), { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error(path + " " + r.status); return r.json();
+    });
+  }
+  Promise.all([load("data/latest.json"), load("data/assessments.json").catch(function () { return []; })])
+    .then(function (res) { render(res[0], res[1]); })
+    .catch(function (e) {
+      $("stamp").textContent = "No data yet";
+      $("banners").appendChild(h("div", { class: "banner err", text: "Could not load data/latest.json (" + e.message + "). If this is a new setup, run the 'Update dashboard' workflow once from the Actions tab." }));
+    });
+})();
+</script>
+</body>
+</html>
