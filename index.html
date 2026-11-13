@@ -107,8 +107,8 @@
   <section id="assessment"></section>
   <div id="sections"></div>
   <section>
-    <h2>Coming up (next 3 weeks)</h2>
-    <p class="blurb">Scheduled release dates from the Federal Reserve Bank of St. Louis (FRED). Dates can move.</p>
+    <h2>Coming up (next 30 days)</h2>
+    <p class="blurb">Data release dates from FRED (St. Louis Fed). FOMC dates are entered by hand from the Fed's published schedule. Dates can move.</p>
     <div class="card"><div class="cal" id="cal"></div></div>
   </section>
   <section>
@@ -273,7 +273,7 @@
     var card = h("div", { class: "card" });
     var sel = h("select", { "aria-label": "Choose assessment date" });
     list.forEach(function (a, i) { sel.appendChild(h("option", { value: i, text: a.generated_ct + (i === 0 ? " (latest)" : "") })); });
-    card.appendChild(h("div", { class: "a-head" }, h("div", { class: "a-title", text: "Daily assessment (drawn only from the data below)" }), list.length ? sel : null));
+    card.appendChild(h("div", { class: "a-head" }, h("div", { class: "a-title", text: "Assessment (drawn only from the data below)" }), list.length ? sel : null));
     var content = h("div"); card.appendChild(content);
     function show(i) {
       content.textContent = "";
@@ -287,7 +287,7 @@
     }
     if (!list.length) {
       var err = data && data.health && data.health.assessment_error;
-      content.appendChild(h("p", { text: err ? "No assessment yet: " + err : "No assessment yet. It appears after the first successful run with an Anthropic key set." }));
+      content.appendChild(h("p", { text: err ? "The last automatic assessment attempt failed: " + err : "The numbers below update automatically every day. The written assessment is produced weekly by Claude from this page's data and saved in your Claude project." }));
     } else {
       show(0); sel.addEventListener("change", function () { show(+sel.value); });
       var err2 = data && data.health && data.health.assessment_error;

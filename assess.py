@@ -87,7 +87,7 @@ def summarize(data):
                 parts.append("STALE" + (" (carried forward from earlier run)" if r.get("carried_forward") else ""))
             lines.append("- " + " | ".join(parts))
     if data.get("calendar"):
-        lines.append("\n## Upcoming releases (next 3 weeks)")
+        lines.append("\n## Upcoming releases (next 30 days)")
         for e in data["calendar"]:
             lines.append(f"- {e['date']}: {e['event']}")
     h = data["health"]
@@ -130,8 +130,7 @@ def main():
 
     key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not key:
-        record_status("ANTHROPIC_API_KEY not set; assessment skipped")
-        print("No ANTHROPIC_API_KEY; skipping assessment")
+        print("No ANTHROPIC_API_KEY; automatic assessment is off (weekly assessment is written by a Claude scheduled task instead)")
         return
 
     prior_heads = [f"{h['generated_ct']}: {h['content'].get('headline', '')}" for h in hist[:2]]

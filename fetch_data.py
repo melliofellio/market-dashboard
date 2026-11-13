@@ -161,7 +161,7 @@ def coinbase_daily(product, days=600):
     return out
 
 
-def fred_calendar(key, horizon_days=21):
+def fred_calendar(key, horizon_days=30):
     q = urllib.parse.urlencode({"api_key": key, "file_type": "json", "limit": 1000})
     rels = json.loads(http_get(f"{FRED}/releases?{q}")).get("releases", [])
     today = dt.date.today()
@@ -182,6 +182,9 @@ def fred_calendar(key, horizon_days=21):
             day = dt.date.fromisoformat(d["date"])
             if today <= day <= today + dt.timedelta(days=horizon_days):
                 events.append({"date": d["date"], "event": label})
+    for d in getattr(C, "FOMC_DATES", []):
+        if today <= dt.date.fromisoformat(d) <= today + dt.timedelta(days=horizon_days):
+            events.append({"date": d, "event": "FOMC decision"})
     # one entry per (date, event)
     uniq = {(e["date"], e["event"]): e for e in events}
     return sorted(uniq.values(), key=lambda e: (e["date"], e["event"]))
@@ -392,11 +395,11 @@ def main():
         last_px = obs[-1][1]
         px_by_date = dict(obs)
         rel_series = [(d, (px_by_date[d] / ma - 1) * 100) for d, ma in ma_series if px_by_date.get(d)]
-        cfg = dict(id="btc_ma", name="Bitcoin vs 50-week moving average", section="market", freq="w", suf="%", dec=1, chg_kind="abs",
+        cfg = dict(id="btc_ma", name="Bitcoin vs 50-week MA, at the last weekly close", section="market", freq="w", suf="%", dec=1, chg_kind="abs",
                    src="Derived from Coinbase weekly closes", desc="Long-term trend line the market watches; weekly close above or below matters most.")
-        extra = [{"k": "50-week MA", "v": f"${ma_now:,.0f}"},
-                 {"k": "Last weekly close", "v": f"${sat[-1][1]:,.0f} ({sat[-1][0]})"},
-                 {"k": "Latest daily vs MA", "v": f"{(last_px / ma_now - 1) * 100:+.1f}%"}]
+        extra = [{"k": f"Latest daily close ({obs[-1][0]}) vs MA", "v": f"{(last_px / ma_now - 1) * 100:+.1f}% (${last_px:,.0f})"},
+                 {"k": "50-week MA", "v": f"${ma_now:,.0f}"},
+                 {"k": "Last weekly close", "v": f"${sat[-1][1]:,.0f} ({sat[-1][0]})"}]
         rec = make_record(cfg, rel_series)
         rec["extra"] = extra
         records.append(rec)

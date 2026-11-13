@@ -43,7 +43,7 @@ FRED_SERIES = [
     dict(id="us2y", name="2-year Treasury yield", series="DGS2", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
          src="Federal Reserve H.15 via FRED", desc="Where the market expects the policy rate to average over two years."),
     dict(id="bill4w", name="4-week T-bill yield", series="DTB4WK", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
-         src="Federal Reserve H.15 via FRED", desc="What cash earns; the opportunity cost of waiting."),
+         src="Federal Reserve H.15 via FRED", desc="What cash earns; the opportunity cost of waiting. Bank-discount basis, so it reads below the investment yield brokers like Fidelity quote."),
     dict(id="fedfunds", name="Fed funds (effective)", series="DFF", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
          src="Federal Reserve Bank of New York via FRED", desc="Actual overnight policy rate."),
     dict(id="real10", name="10-year real yield (TIPS)", series="DFII10", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
@@ -108,7 +108,7 @@ FRED_SERIES = [
          src="Bureau of Labor Statistics via FRED", desc="Inflation excluding food and energy."),
     dict(id="corepce", name="Core PCE, year over year", series="PCEPILFE", units="pc1", freq="m", section="lagging", suf="%", dec=1, chg_kind="abs", bad_when="up",
          src="Bureau of Economic Analysis via FRED", desc="The Fed's inflation target measure."),
-    dict(id="ciloans", name="Commercial & industrial loans, year over year", series="TOTCI", units="pc1", freq="w", section="lagging", suf="%", dec=1, chg_kind="abs",
+    dict(id="ciloans", name="Commercial & industrial loans, year over year", series="TOTCI", units="pc1", freq="w", section="lagging", suf="%", dec=1, chg_kind="abs", max_age=21,
          src="Federal Reserve H.8 via FRED (weekly)", desc="Business borrowing; lags the cycle, and a contraction confirms a slowdown."),
 ]
 
@@ -134,9 +134,12 @@ CALENDAR_RELEASES = [
     (r"^Gross Domestic Product$", "GDP"),
     (r"^Advance Monthly Sales for Retail", "Retail sales"),
     (r"^G\.17 Industrial Production", "Industrial production"),
-    (r"^FOMC Press Release$", "FOMC decision"),
     (r"^Job Openings and Labor Turnover", "JOLTS job openings"),
 ]
+
+# FOMC decision days, entered by hand from federalreserve.gov/monetarypolicy/fomccalendars.htm
+# (FRED's FOMC release lists a placeholder every day, so it cannot be used). ADD NEXT YEAR'S DATES EACH DECEMBER.
+FOMC_DATES = ["2026-12-09"]
 
 # Staleness thresholds in days (observation date to today), by frequency
 MAX_AGE = {"d": 5, "w": 12, "m": 75, "q": 220}
