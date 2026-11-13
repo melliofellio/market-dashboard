@@ -124,6 +124,12 @@ def twelve_daily(symbol, key, size=420, drop_partial=False):
     if drop_partial:
         today = dt.datetime.now(dt.timezone.utc).date().isoformat()
         out = [o for o in out if o[0] < today]
+    elif symbol != "XAU/USD":
+        # US-listed ETFs: ignore today's bar until the session is over (16:30 New York time)
+        from zoneinfo import ZoneInfo
+        ny = dt.datetime.now(ZoneInfo("America/New_York"))
+        if ny.hour * 60 + ny.minute < 16 * 60 + 30:
+            out = [o for o in out if o[0] < ny.date().isoformat()]
     if not out:
         raise RuntimeError("no rows returned")
     return out
@@ -515,6 +521,19 @@ def main():
     with open(tmp, "w") as f:
         json.dump(out, f, separators=(",", ":"))
     os.replace(tmp, latest_path)
+
+    # Compact plain-text digest (small enough for any tool or chat to read in full)
+    try:
+        import assess
+        head = (f"MARKET DASHBOARD DIGEST. Data generated {out['generated_ct']} ({session} run). "
+                f"{len(records)} indicators; {len(stale)} stale; {len(failures)} source failures.\n"
+                "Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.\n")
+        if stale:
+            head += "Stale: " + "; ".join(f"{x['name']} (last {x['asof']})" for x in stale) + "\n"
+        with open(os.path.join(DATA, "digest.txt"), "w") as f:
+            f.write(head + assess.summarize(out) + "\n")
+    except Exception as e:
+        print("digest not written:", scrub(str(e)))
 
     print(f"{len(records)} indicators written; {len(stale)} stale; {len(failures)} failures")
     for f in failures:

@@ -52,8 +52,8 @@ FRED_SERIES = [
          src="Federal Reserve H.15 via FRED", desc="Inflation the bond market is pricing over 10 years."),
     dict(id="mortgage30", name="30-yr mortgage rate", series="MORTGAGE30US", units="lin", freq="w", section="market", suf="%", dec=2, chg_kind="bp",
          src="Freddie Mac PMMS via FRED (weekly, Thursday)", desc="Housing financing cost; tracks the 10-year plus a spread."),
-    dict(id="usd", name="US dollar (broad, trade-weighted)", series="DTWEXBGS", units="lin", freq="d", section="market", dec=2, chg_kind="pct",
-         src="Federal Reserve Board via FRED (1-day lag)", desc="Dollar vs a broad basket; strength tightens global financial conditions."),
+    dict(id="usd", name="US dollar (broad, trade-weighted)", series="DTWEXBGS", units="lin", freq="d", section="market", dec=2, chg_kind="pct", max_age=12,
+         src="Federal Reserve Board via FRED (posted weekly, so it runs up to a week behind)", desc="Dollar vs a broad basket; strength tightens global financial conditions."),
     dict(id="wti", name="WTI crude oil", series="DCOILWTICO", units="lin", freq="d", section="market", pre="$", dec=2, chg_kind="pct",
          src="US EIA via FRED (spot, 1-day lag)", desc="Energy input cost and an inflation driver."),
 
