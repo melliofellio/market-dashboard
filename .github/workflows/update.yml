@@ -1,0 +1,96 @@
+name: Update dashboard
+
+on:
+  schedule:
+    # After the US close, every day (00:40 UTC = 6:40 pm Central Standard / 7:40 pm Daylight).
+    - cron: "40 0 * * *"
+    # Next-morning catch-up for series the sources publish with a one-day lag (7:20 am CST / 8:20 am CDT), Tue-Sat.
+    - cron: "20 13 * * 2-6"
+  workflow_dispatch:        # lets you press "Run workflow" by hand
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      broken: ${{ steps.health.outputs.broken }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch indicator data
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+        run: python fetch_data.py
+
+      - name: Write daily assessment
+        continue-on-error: true      # the dashboard still updates if this step fails
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+        run: python assess.py
+
+      - name: Save data to the repository
+        run: |
+          git config user.name "dashboard-bot"
+          git config user.email "dashboard-bot@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update data $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
+
+      - name: Check data health
+        id: health
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          h = json.load(open("data/latest.json"))["health"]
+          print("broken=" + ("true" if len(h["failed"]) > 8 or len(h["stale"]) > 12 else "false"))
+          PY
+
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp index.html manifest.webmanifest icon-192.png icon-512.png _site/
+          cp -r data _site/data
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  alert:
+    # Publishes the page with its stale-data banner first, then marks the run failed so GitHub emails you.
+    needs: [update, deploy]
+    if: needs.update.outputs.broken == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Too many sources failed or are stale. Open the 'Fetch indicator data' step log." >&2
+          exit 1
