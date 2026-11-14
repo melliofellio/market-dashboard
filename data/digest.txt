@@ -1,10 +1,10 @@
-MARKET DASHBOARD DIGEST. Data generated Fri Nov 13, 2026 04:06 PM CST (after close run). 46 indicators; 0 stale; 0 source failures.
+MARKET DASHBOARD DIGEST. Data generated Fri Nov 13, 2026 07:44 PM CST (after close run). 46 indicators; 0 stale; 0 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
 
 ## Market snapshot
-- S&P 500: 7,592.40 (as of 2026-11-12) | vs prior obs 2026-11-11: -0.35% | week-to-date +2.92% | week in progress | percentile in own history: 92 | From record high: -2.9% | Record close: 7,818.93 (2026-10-06)
+- S&P 500: 7,561.67 (as of 2026-11-13) | vs prior obs 2026-11-12: -0.40% | week-to-date +2.51% | week complete | percentile in own history: 90 | From record high: -3.3% | Record close: 7,818.93 (2026-10-06)
 - Nasdaq Composite: 25,366.09 (as of 2026-11-12) | vs prior obs 2026-11-11: -0.39% | week-to-date +3.20% | week in progress | percentile in own history: 84
-- Dow Jones Industrial: 52,297.09 (as of 2026-11-12) | vs prior obs 2026-11-11: -0.36% | week-to-date +1.97% | week in progress | percentile in own history: 93
+- Dow Jones Industrial: 52,347.55 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.10% | week-to-date +2.07% | week complete | percentile in own history: 93
 - 10-year Treasury yield: 5.10% (as of 2026-11-12) | vs prior obs 2026-11-10: +12 bp | week-to-date +24.00 bp | week in progress | percentile in own history: 98
 - 2-year Treasury yield: 4.86% (as of 2026-11-12) | vs prior obs 2026-11-10: +13 bp | week-to-date +35.00 bp | week in progress | percentile in own history: 95
 - 4-week T-bill yield: 3.97% (as of 2026-11-12) | vs prior obs 2026-11-10: +9 bp | week-to-date +9.00 bp | week in progress | percentile in own history: 35
@@ -15,12 +15,12 @@ Each indicator has its own as-of date. Week-to-date is measured from the prior w
 - US dollar (broad, trade-weighted): 121.88 (as of 2026-11-06) | vs prior obs 2026-11-05: +0.31% | week-to-date +0.18% | week complete | percentile in own history: 66
 - WTI crude oil: $89.62 (as of 2026-11-11) | vs prior obs 2026-11-10: +0.00% | week-to-date -5.03% | week in progress | percentile in own history: 85
 - VIX (S&P 500 implied volatility): 18.70 (as of 2026-11-12) | vs prior obs 2026-11-11: +1.21 | week-to-date -6.94 | week in progress | percentile in own history: 74
-- Bitcoin (USD): $71,370 (as of 2026-11-12) | vs prior obs 2026-11-11: -3.46% | week-to-date -4.53% | week in progress | percentile in own history: 23
-- Ethereum (USD): $2,017 (as of 2026-11-12) | vs prior obs 2026-11-11: -1.77% | week-to-date -5.08% | week in progress | percentile in own history: 25
-- Bitcoin vs 50-week MA, at the last weekly close: 0.3% (as of 2026-11-07) | vs prior obs 2026-10-31: -2.0 | percentile in own history: 81 | Latest daily close (2026-11-12) vs MA: -5.5% ($71,370) | 50-week MA: $75,534 | Last weekly close: $75,754 (2026-11-07)
-- Gold (XAU/USD spot): $3,883.66 (as of 2026-11-12) | vs prior obs 2026-11-11: -2.59% | week-to-date -4.49% | week in progress | percentile in own history: 30
-- Breadth proxy: equal-weight vs cap-weight (RSP/SPY): 0.2932 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.57% | week-to-date -0.22% | week complete | percentile in own history: 70
-- Small caps vs large caps (IWM/SPY): 0.3680 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.06% | week-to-date -1.13% | week complete | percentile in own history: 51
+- Bitcoin (USD): $68,237 (as of 2026-11-13) | vs prior obs 2026-11-12: -4.39% | week-to-date -8.72% | week complete | percentile in own history: 18
+- Ethereum (USD): $1,928 (as of 2026-11-13) | vs prior obs 2026-11-12: -4.42% | week-to-date -9.27% | week complete | percentile in own history: 20
+- Bitcoin vs 50-week MA, at the last weekly close: 0.3% (as of 2026-11-07) | vs prior obs 2026-10-31: -2.0 | percentile in own history: 81 | Latest daily close (2026-11-13) vs MA: -9.7% ($68,237) | 50-week MA: $75,534 | Last weekly close: $75,754 (2026-11-07)
+- Gold (XAU/USD spot): $3,875.68 (as of 2026-11-13) | vs prior obs 2026-11-12: -0.21% | week-to-date -4.68% | week complete | percentile in own history: 29
+- Breadth proxy: equal-weight vs cap-weight (RSP/SPY): 0.2932 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.58% | week-to-date -0.21% | week complete | percentile in own history: 70
+- Small caps vs large caps (IWM/SPY): 0.3680 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.07% | week-to-date -1.12% | week complete | percentile in own history: 51
 
 ## Leading indicators
 - Yield curve: 10-yr minus 3-month: 0.83 pp (as of 2026-11-13) | vs prior obs 2026-11-12: +5 bp | week-to-date +16.00 bp | week complete | 4 wk trend: flat | percentile in own history: 94
