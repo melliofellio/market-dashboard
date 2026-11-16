@@ -1,4 +1,4 @@
-MARKET DASHBOARD DIGEST. Data generated Sun Nov 15, 2026 08:03 PM CST (after close run). 46 indicators; 9 stale; 0 source failures.
+MARKET DASHBOARD DIGEST. Data generated Mon Nov 16, 2026 08:28 AM CST (morning catch-up run). 46 indicators; 9 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
 Stale: Building permits (thousands, annualized) (last 2026-09-01); Consumer sentiment (U. Michigan) (last 2026-09-01); M2 money supply, year over year (last 2026-09-01); Industrial production, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); Retail sales, year over year (nominal) (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
 
@@ -6,11 +6,11 @@ Stale: Building permits (thousands, annualized) (last 2026-09-01); Consumer sent
 - S&P 500: 7,561.67 (as of 2026-11-13) | vs prior obs 2026-11-12: -0.40% | week-to-date +2.51% | week complete | percentile in own history: 90 | From record high: -3.3% | Record close: 7,818.93 (2026-10-06)
 - Nasdaq Composite: 25,136.27 (as of 2026-11-13) | vs prior obs 2026-11-12: -0.91% | week-to-date +2.27% | week complete | percentile in own history: 83
 - Dow Jones Industrial: 52,347.55 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.10% | week-to-date +2.07% | week complete | percentile in own history: 93
-- 10-year Treasury yield: 5.10% (as of 2026-11-12) | vs prior obs 2026-11-10: +12 bp | week-to-date +24.00 bp | week in progress | percentile in own history: 98
-- 2-year Treasury yield: 4.86% (as of 2026-11-12) | vs prior obs 2026-11-10: +13 bp | week-to-date +35.00 bp | week in progress | percentile in own history: 95
+- 10-year Treasury yield: 5.15% (as of 2026-11-13) | vs prior obs 2026-11-12: +5 bp | week-to-date +29.00 bp | week complete | percentile in own history: 98
+- 2-year Treasury yield: 4.88% (as of 2026-11-13) | vs prior obs 2026-11-12: +2 bp | week-to-date +37.00 bp | week complete | percentile in own history: 96
 - 4-week T-bill yield: 3.97% (as of 2026-11-12) | vs prior obs 2026-11-10: +9 bp | week-to-date +9.00 bp | week in progress | percentile in own history: 35
 - Fed funds (effective): 3.88% (as of 2026-11-12) | vs prior obs 2026-11-11: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 48
-- 10-year real yield (TIPS): 2.86% (as of 2026-11-12) | vs prior obs 2026-11-10: +8 bp | week-to-date +23.00 bp | week in progress | percentile in own history: 99
+- 10-year real yield (TIPS): 2.91% (as of 2026-11-13) | vs prior obs 2026-11-12: +5 bp | week-to-date +28.00 bp | week complete | percentile in own history: 99
 - 10-year breakeven inflation: 2.24% (as of 2026-11-13) | vs prior obs 2026-11-12: +0 bp | week-to-date +1.00 bp | week complete | percentile in own history: 20
 - 30-yr mortgage rate: 7.11% (as of 2026-11-12) | vs prior obs 2026-11-05: -7 bp | percentile in own history: 91
 - US dollar (broad, trade-weighted): 121.88 (as of 2026-11-06) | vs prior obs 2026-11-05: +0.31% | week-to-date +0.18% | week complete | percentile in own history: 66
@@ -36,8 +36,8 @@ Stale: Building permits (thousands, annualized) (last 2026-09-01); Consumer sent
 - Bank reserves at the Fed: $2,961B (as of 2026-11-11) | vs prior obs 2026-11-04: +1.04% | 4 wk trend: worse | percentile in own history: 12
 - Reverse repo facility (overnight): $0B (as of 2026-11-13) | vs prior obs 2026-11-12: +0.1 | week-to-date +0.17 | week complete | percentile in own history: 6
 - Net liquidity (Fed assets - Treasury cash - reverse repo): $5,844B (as of 2026-11-11) | vs prior obs 2026-11-04: +0.93% | 4 wk trend: flat | percentile in own history: 29
-- Policy expectations: 2-yr yield minus Fed funds: 0.98 pp (as of 2026-11-12) | vs prior obs 2026-11-10: +13 bp | week-to-date +35.00 bp | week in progress | percentile in own history: 99
-- Treasury volatility: 20-day std of 10-yr daily moves (bp): 6.6 (as of 2026-11-12) | vs prior obs 2026-11-10: +0.6 | week-to-date +1.22 | week in progress | 4 wk trend: worse | percentile in own history: 84
+- Policy expectations: 2-yr yield minus Fed funds: 1.00 pp (as of 2026-11-13) | vs prior obs 2026-11-12: +2 bp | week-to-date +37.00 bp | week complete | percentile in own history: 99
+- Treasury volatility: 20-day std of 10-yr daily moves (bp): 6.4 (as of 2026-11-13) | vs prior obs 2026-11-12: -0.2 | week-to-date +1.01 | week complete | 4 wk trend: worse | percentile in own history: 81
 
 ## Coincident indicators
 - Nonfarm payrolls, monthly change (thousands): 165 (as of 2026-10-01) | vs prior obs 2026-09-01: +105.0 | 3 mo trend: better | percentile in own history: 45
@@ -67,3 +67,7 @@ Stale: Building permits (thousands, annualized) (last 2026-09-01); Consumer sent
 - 2026-12-10: CPI
 - 2026-12-16: Industrial production
 - 2026-12-16: Retail sales
+
+## Fetch failures this run
+- US dollar index (DXY): HTTPError: HTTP Error 429: Too Many Requests
+- MOVE index (Treasury implied volatility): HTTPError: HTTP Error 429: Too Many Requests
