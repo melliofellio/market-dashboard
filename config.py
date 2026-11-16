@@ -38,16 +38,16 @@ FRED_SERIES = [
          src="Nasdaq via FRED (1-day lag)", desc="Tech-heavy equities; the growth/duration-sensitive end."),
     dict(id="dow", name="Dow Jones Industrial", series="DJIA", units="lin", freq="d", section="market", dec=2, chg_kind="pct",
          src="S&P Dow Jones Indices via FRED (1-day lag)", desc="30 large industrials; price-weighted."),
-    dict(id="us10y", name="10-year Treasury yield", series="DGS10", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
-         src="Federal Reserve H.15 via FRED", desc="Benchmark long rate; prices mortgages, valuations, and the dollar."),
-    dict(id="us2y", name="2-year Treasury yield", series="DGS2", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
-         src="Federal Reserve H.15 via FRED", desc="Where the market expects the policy rate to average over two years."),
+    dict(id="us10y", name="10-year Treasury yield", tsy=("nominal", "10YR"), series="DGS10", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
+         src="US Treasury daily par yield curve (treasury.gov, same-day)", desc="Benchmark long rate; prices mortgages, valuations, and the dollar."),
+    dict(id="us2y", name="2-year Treasury yield", tsy=("nominal", "2YR"), series="DGS2", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
+         src="US Treasury daily par yield curve (treasury.gov, same-day)", desc="Where the market expects the policy rate to average over two years."),
     dict(id="bill4w", name="4-week T-bill yield", series="DTB4WK", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
          src="Federal Reserve H.15 via FRED", desc="What cash earns; the opportunity cost of waiting. Bank-discount basis, so it reads below the investment yield brokers like Fidelity quote."),
     dict(id="fedfunds", name="Fed funds (effective)", series="DFF", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
          src="Federal Reserve Bank of New York via FRED", desc="Actual overnight policy rate."),
-    dict(id="real10", name="10-year real yield (TIPS)", series="DFII10", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
-         src="Federal Reserve H.15 via FRED", desc="Inflation-adjusted long rate; the main headwind for gold and long-duration assets."),
+    dict(id="real10", name="10-year real yield (TIPS)", tsy=("real", "10YR"), series="DFII10", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
+         src="US Treasury daily real yield curve (treasury.gov, same-day)", desc="Inflation-adjusted long rate; the main headwind for gold and long-duration assets."),
     dict(id="be10", name="10-year breakeven inflation", series="T10YIE", units="lin", freq="d", section="market", suf="%", dec=2, chg_kind="bp",
          src="Federal Reserve H.15 via FRED", desc="Inflation the bond market is pricing over 10 years."),
     dict(id="mortgage30", name="30-yr mortgage rate", series="MORTGAGE30US", units="lin", freq="w", section="market", suf="%", dec=2, chg_kind="bp",
@@ -58,10 +58,10 @@ FRED_SERIES = [
          src="US EIA via FRED (spot, 1-day lag)", desc="Energy input cost and an inflation driver."),
 
     # ---------------- Leading ----------------
-    dict(id="c10y3m", name="Yield curve: 10-yr minus 3-month", series="T10Y3M", units="lin", freq="d", section="leading", suf=" pp", dec=2, chg_kind="bp", bad_when="down",
-         src="Federal Reserve H.15 via FRED", desc="The Fed's preferred curve recession gauge. Below zero = inverted."),
-    dict(id="c10y2y", name="Yield curve: 10-yr minus 2-year", series="T10Y2Y", units="lin", freq="d", section="leading", suf=" pp", dec=2, chg_kind="bp", bad_when="down",
-         src="Federal Reserve H.15 via FRED", desc="Most-quoted curve. Re-steepening after inversion often comes close to the downturn itself."),
+    dict(id="c10y3m", name="Yield curve: 10-yr minus 3-month", tsy=("spread", "10YR", "3MO"), series="T10Y3M", units="lin", freq="d", section="leading", suf=" pp", dec=2, chg_kind="bp", bad_when="down",
+         src="Derived from US Treasury daily par yield curve (10-yr minus 3-month)", desc="The Fed's preferred curve recession gauge. Below zero = inverted."),
+    dict(id="c10y2y", name="Yield curve: 10-yr minus 2-year", tsy=("spread", "10YR", "2YR"), series="T10Y2Y", units="lin", freq="d", section="leading", suf=" pp", dec=2, chg_kind="bp", bad_when="down",
+         src="Derived from US Treasury daily par yield curve (10-yr minus 2-year)", desc="Most-quoted curve. Re-steepening after inversion often comes close to the downturn itself."),
     dict(id="hy_oas", name="High-yield credit spread (OAS)", series="BAMLH0A0HYM2", units="lin", freq="d", section="leading", suf="%", dec=2, chg_kind="bp", bad_when="up",
          src="ICE Data Indices via FRED (1-day lag)", desc="Extra yield junk bonds pay. Lags equity stress by days, leads the real economy by months."),
     dict(id="ig_oas", name="Investment-grade credit spread (OAS)", series="BAMLC0A0CM", units="lin", freq="d", section="leading", suf="%", dec=2, chg_kind="bp", bad_when="up",
@@ -125,6 +125,20 @@ TD_SYMBOLS = {
     "rsp": "RSP",
     "iwm": "IWM",
 }
+
+# Yahoo Finance chart API (no key). UNOFFICIAL relay of ICE indexes: it has no service agreement and can change or
+# break without notice. A failure is flagged and the last good value is carried forward; nothing is estimated.
+YAHOO_SYMBOLS = [
+    dict(id="dxy", symbol="DX-Y.NYB", name="US dollar index (DXY)", dec=2, chg_kind="pct",
+         src="ICE U.S. Dollar Index (DXY) via Yahoo Finance relay (unofficial; last complete day)",
+         desc="Dollar vs six major currencies (euro-heavy). The market-quoted dollar gauge; a different basket than the broad Fed index."),
+    dict(id="move", symbol="^MOVE", name="MOVE index (Treasury implied volatility)", dec=2, chg_kind="abs", bad_when="up",
+         src="ICE BofA MOVE Index via Yahoo Finance relay (unofficial; last complete day)",
+         desc="Implied (options-based) volatility of Treasuries; the bond market's VIX. Compare with the realized measure below."),
+]
+
+# US Treasury daily yield curve CSVs (treasury.gov). Years of history to pull (current year plus this many before).
+TREASURY_YEARS_BACK = 3
 
 # Release calendar: regex on FRED release names -> label shown on the page
 CALENDAR_RELEASES = [

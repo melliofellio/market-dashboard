@@ -33,6 +33,9 @@ FRED = os.environ.get("FRED_BASE", "https://api.stlouisfed.org/fred")
 TD = os.environ.get("TD_BASE", "https://api.twelvedata.com")
 CBOE_VIX = os.environ.get("CBOE_VIX_URL", "https://cdn-api.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv")
 COINBASE = os.environ.get("COINBASE_BASE", "https://api.exchange.coinbase.com")
+TREASURY = os.environ.get("TREASURY_BASE", "https://home.treasury.gov/resource-center/data-chart-center/interest-rates")
+YAHOO = os.environ.get("YAHOO_BASE", "https://query1.finance.yahoo.com")
+BROWSER_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
 RETRY_SLEEP = float(os.environ.get("RETRY_SLEEP", "2"))
 SECRETS = [os.environ.get(k, "") for k in ("FRED_API_KEY", "TWELVE_DATA_API_KEY", "ANTHROPIC_API_KEY")]
@@ -45,16 +48,16 @@ def scrub(text):
     return text
 
 
-def http_get(url, tries=3, timeout=40):
+def http_get(url, tries=3, timeout=40, ua="market-dashboard/1.0 (personal use)"):
     last = None
     for i in range(tries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "market-dashboard/1.0 (personal use)"})
+            req = urllib.request.Request(url, headers={"User-Agent": ua})
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read().decode("utf-8")
         except urllib.error.HTTPError as e:
             last = e
-            if e.code in (400, 401, 403, 404):  # retrying will not help
+            if e.code in (400, 401, 403, 404):  # retrying will not help (429 and 5xx are retried)
                 break
             time.sleep(RETRY_SLEEP * (i + 1))
         except Exception as e:  # network hiccup
@@ -158,6 +161,73 @@ def coinbase_daily(product, days=600):
     out = sorted((d, v) for d, v in rows.items() if d < today)
     if not out:
         raise RuntimeError("no candles returned")
+    return out
+
+
+def treasury_curve(kind, years_back=3):
+    """US Treasury daily par yield curve (kind='nominal') or real yield curve (kind='real') from treasury.gov.
+
+    Returns {COLUMN: [(iso_date, pct), ...]} ascending by date, with column names normalised
+    (e.g. '10 Yr' and '10 YR' both become '10YR'). The CSV arrives newest-first, so it is sorted here.
+    Treasury publishes the same afternoon, so these are a day fresher than the FRED copies of the same data.
+    The current year must load; older years only extend the history used for percentiles.
+    """
+    page = {"nominal": "daily_treasury_yield_curve", "real": "daily_treasury_real_yield_curve"}[kind]
+    this_year = dt.date.today().year
+    cols = {}
+    for y in range(this_year - years_back, this_year + 1):
+        q = f"type={page}&field_tdr_date_value={y}&page&_format=csv"
+        try:
+            text = http_get(f"{TREASURY}/daily-treasury-rates.csv/{y}/all?{q}")
+        except RuntimeError:
+            if y == this_year:
+                raise
+            continue
+        for r in csv.DictReader(io.StringIO(text)):
+            r = {re.sub(r"\s+", "", (k or "")).upper(): (v or "").strip() for k, v in r.items()}
+            d = r.get("DATE")
+            if not d:
+                continue
+            try:
+                day = dt.datetime.strptime(d, "%m/%d/%Y").date().isoformat()
+            except ValueError:
+                continue  # a malformed row is skipped, never repaired
+            for k, v in r.items():
+                if k == "DATE" or not v:
+                    continue
+                try:
+                    cols.setdefault(k, {})[day] = float(v)
+                except ValueError:
+                    continue
+    out = {k: sorted(v.items()) for k, v in cols.items()}
+    if not out or max(len(v) for v in out.values()) < 30:
+        raise RuntimeError("Treasury file returned too few rows")
+    return out
+
+
+def yahoo_daily(symbol, range_="3y"):
+    """Daily closes from Yahoo Finance's chart API (unofficial relay; no key). Today's bar is dropped until the
+    US session is over (17:30 New York), so a half-finished day is never shown as a close."""
+    from zoneinfo import ZoneInfo
+    sym = urllib.parse.quote(symbol, safe="")
+    j = json.loads(http_get(f"{YAHOO}/v8/finance/chart/{sym}?range={range_}&interval=1d", ua=BROWSER_UA))
+    res = (j.get("chart") or {}).get("result")
+    if not res:
+        raise RuntimeError(scrub(str((j.get("chart") or {}).get("error") or j)[:200]))
+    res = res[0]
+    off = dt.timezone(dt.timedelta(seconds=int((res.get("meta") or {}).get("gmtoffset") or 0)))
+    closes = (((res.get("indicators") or {}).get("quote") or [{}])[0]).get("close") or []
+    out = {}
+    for t, c in zip(res.get("timestamp") or [], closes):
+        if c is None:
+            continue
+        out[dt.datetime.fromtimestamp(t, off).date().isoformat()] = float(c)
+    ny = dt.datetime.now(ZoneInfo("America/New_York"))
+    if ny.hour * 60 + ny.minute < 17 * 60 + 30:
+        out.pop(ny.date().isoformat(), None)
+    out = sorted(out.items())
+    if len(out) < 30:
+        raise RuntimeError("too few rows returned")
     return out
 
 
@@ -326,9 +396,43 @@ def main():
         except Exception as e:
             fail(cfg["id"], cfg["name"], f"derived: {e}")
 
-    # ---- FRED tiles
+    # ---- US Treasury curves (same-day source for 2y, 10y, TIPS and the curve spreads)
+    tsy, tsy_err = {}, {}
+    for kind in ("nominal", "real"):
+        try:
+            tsy[kind] = treasury_curve(kind, C.TREASURY_YEARS_BACK)
+        except Exception as e:
+            tsy_err[kind] = str(e)
+
+    def tsy_obs(spec):
+        kind = spec[0]
+        if kind == "real" or kind == "nominal":
+            if spec[0] not in tsy:
+                raise RuntimeError(f"Treasury {spec[0]} curve unavailable: {tsy_err.get(spec[0], 'not loaded')}")
+            col = tsy[spec[0]].get(spec[1])
+            if not col:
+                raise RuntimeError(f"Treasury column {spec[1]} missing")
+            return col
+        if "nominal" not in tsy:
+            raise RuntimeError(f"Treasury nominal curve unavailable: {tsy_err.get('nominal', 'not loaded')}")
+        a, b = tsy["nominal"].get(spec[1]), tsy["nominal"].get(spec[2])
+        if not a or not b:
+            raise RuntimeError(f"Treasury column {spec[1]} or {spec[2]} missing")
+        bd = dict(b)
+        return [(d, round(v - bd[d], 4)) for d, v in a if d in bd]
+
+    # ---- FRED tiles (Treasury-sourced entries are routed to treasury.gov instead)
     for cfg in C.FRED_SERIES:
         try:
+            if cfg.get("tsy"):
+                obs = tsy_obs(cfg["tsy"])
+                keep = dt.date.today() - dt.timedelta(days=C.LOOKBACK_DAYS[cfg["freq"]])
+                obs = [o for o in obs if o[0] >= keep.isoformat()]
+                if not obs:
+                    raise RuntimeError("no observations returned")
+                raw[cfg["id"]] = obs
+                records.append(make_record(cfg, obs))
+                continue
             if not fred_key:
                 raise RuntimeError("FRED_API_KEY is not set")
             days = 3800 if cfg["id"] == "sp500" else None
@@ -367,6 +471,18 @@ def main():
         records.append(make_record(vix_cfg, vix))
     except Exception as e:
         fail("vix", vix_cfg["name"], str(e))
+
+    # ---- DXY and MOVE (ICE indexes, via Yahoo Finance relay; unofficial, so failure is expected sometimes)
+    for y in C.YAHOO_SYMBOLS:
+        ycfg = dict(id=y["id"], name=y["name"], section="market", freq="d", dec=y["dec"], chg_kind=y["chg_kind"],
+                    bad_when=y.get("bad_when"), src=y["src"], desc=y["desc"])
+        try:
+            obs = yahoo_daily(y["symbol"])
+            raw[y["id"]] = obs
+            records.append(make_record(ycfg, obs))
+        except Exception as e:
+            fail(y["id"], y["name"], str(e))
+        time.sleep(0.5)
 
     # ---- Crypto (Coinbase, the exchange itself)
     for pid, cid, nm, dec in (("BTC-USD", "btc", "Bitcoin (USD)", 0), ("ETH-USD", "eth", "Ethereum (USD)", 0)):
@@ -461,11 +577,17 @@ def main():
     add_derived(dict(id="netliq", name="Net liquidity"), net_liquidity)
 
     def policy_expectations():
-        two, ff = raw["us2y"], dict(raw["fedfunds"])
-        series = [(d, v - ff[d]) for d, v in two if d in ff]
+        two, ffs = raw["us2y"], raw["fedfunds"]
+        series = []
+        for d, v in two:
+            f = align_last_at_or_before(ffs, d)   # policy rate only moves at meetings, so the latest print stands in for a day not yet posted
+            if f and (dt.date.fromisoformat(d) - dt.date.fromisoformat(f[0])).days <= 5:
+                series.append((d, v - f[1]))
+        if not series:
+            raise RuntimeError("no overlapping dates between 2-yr yield and Fed funds")
         cfg = dict(id="polexp", name="Policy expectations: 2-yr yield minus Fed funds", section="leading", freq="d",
                    suf=" pp", dec=2, chg_kind="bp",
-                   src="Derived from Federal Reserve data via FRED",
+                   src="Derived: 2-yr yield (US Treasury) minus effective Fed funds rate (NY Fed via FRED)",
                    desc="Above 0 = market prices hikes; below 0 = prices cuts. Free stand-in for FedWatch odds.")
         records.append(make_record(cfg, series))
     add_derived(dict(id="polexp", name="Policy expectations"), policy_expectations)
@@ -479,8 +601,8 @@ def main():
             series.append((diffs[i][0], pstdev(window)))
         cfg = dict(id="ratevol", name="Treasury volatility: 20-day std of 10-yr daily moves (bp)", section="leading",
                    freq="d", dec=1, chg_kind="abs", bad_when="up",
-                   src="Derived from Federal Reserve H.15 via FRED",
-                   desc="Free stand-in for the MOVE index. Rising = bond market stress, which spills into everything.")
+                   src="Derived from US Treasury daily 10-yr yields",
+                   desc="Realized volatility of the 10-yr yield (what already happened). The MOVE index above is the implied counterpart; when they diverge, options traders expect something the recent past does not show.")
         records.append(make_record(cfg, series))
     add_derived(dict(id="ratevol", name="Treasury volatility"), rate_vol)
 
