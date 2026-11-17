@@ -1,10 +1,10 @@
-MARKET DASHBOARD DIGEST. Data generated Mon Nov 16, 2026 07:55 PM CST (after close run). 46 indicators; 10 stale; 2 source failures.
+MARKET DASHBOARD DIGEST. Data generated Tue Nov 17, 2026 08:29 AM CST (morning catch-up run). 46 indicators; 8 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
-Stale: WTI crude oil (last 2026-11-11); Building permits (thousands, annualized) (last 2026-09-01); Consumer sentiment (U. Michigan) (last 2026-09-01); M2 money supply, year over year (last 2026-09-01); Industrial production, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); Retail sales, year over year (nominal) (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
+Stale: WTI crude oil (last 2026-11-11); Building permits (thousands, annualized) (last 2026-09-01); Consumer sentiment (U. Michigan) (last 2026-09-01); M2 money supply, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
 
 ## Market snapshot
 - S&P 500: 7,416.59 (as of 2026-11-16) | vs prior obs 2026-11-13: -1.92% | week-to-date -1.92% | week in progress | percentile in own history: 56 | From record high: -5.1% | Record close: 7,818.93 (2026-10-06)
-- Nasdaq Composite: 25,136.27 (as of 2026-11-13) | vs prior obs 2026-11-12: -0.91% | week-to-date +2.27% | week complete | percentile in own history: 83
+- Nasdaq Composite: 24,509.76 (as of 2026-11-16) | vs prior obs 2026-11-13: -2.49% | week-to-date -2.49% | week in progress | percentile in own history: 81
 - Dow Jones Industrial: 51,608.17 (as of 2026-11-16) | vs prior obs 2026-11-13: -1.41% | week-to-date -1.41% | week in progress | percentile in own history: 88
 - 10-year Treasury yield: 5.12% (as of 2026-11-16) | vs prior obs 2026-11-13: -3 bp | week-to-date -3.00 bp | week in progress | percentile in own history: 98
 - 2-year Treasury yield: 4.83% (as of 2026-11-16) | vs prior obs 2026-11-13: -5 bp | week-to-date -5.00 bp | week in progress | percentile in own history: 93
@@ -15,7 +15,7 @@ Stale: WTI crude oil (last 2026-11-11); Building permits (thousands, annualized)
 - 30-yr mortgage rate: 7.11% (as of 2026-11-12) | vs prior obs 2026-11-05: -7 bp | percentile in own history: 91
 - US dollar (broad, trade-weighted): 122.65 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.09% | week-to-date +0.63% | week complete | percentile in own history: 73
 - WTI crude oil: $89.62 (as of 2026-11-11) | vs prior obs 2026-11-10: +0.00% | week-to-date -5.03% | week in progress | percentile in own history: 85 | STALE
-- VIX (S&P 500 implied volatility): 19.30 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.60 | week-to-date -6.34 | week complete | percentile in own history: 79
+- VIX (S&P 500 implied volatility): 22.91 (as of 2026-11-16) | vs prior obs 2026-11-13: +3.61 | week-to-date +3.61 | week in progress | percentile in own history: 91
 - Bitcoin (USD): $64,817 (as of 2026-11-16) | vs prior obs 2026-11-15: -0.76% | week-to-date -0.76% | week in progress | percentile in own history: 12
 - Ethereum (USD): $1,819 (as of 2026-11-16) | vs prior obs 2026-11-15: -0.85% | week-to-date -0.85% | week in progress | percentile in own history: 13
 - Bitcoin vs 50-week MA, at the last weekly close: -14.5% (as of 2026-11-14) | vs prior obs 2026-11-07: -14.8 | percentile in own history: 68 | Latest daily close (2026-11-16) vs MA: -13.6% ($64,817) | 50-week MA: $75,000 | Last weekly close: $64,119 (2026-11-14)
@@ -41,9 +41,9 @@ Stale: WTI crude oil (last 2026-11-11); Building permits (thousands, annualized)
 
 ## Coincident indicators
 - Nonfarm payrolls, monthly change (thousands): 165 (as of 2026-10-01) | vs prior obs 2026-09-01: +105.0 | 3 mo trend: better | percentile in own history: 45
-- Industrial production, year over year: 2.2% (as of 2026-09-01) | vs prior obs 2026-08-01: +0.6 | 3 mo trend: better | percentile in own history: 77 | STALE
+- Industrial production, year over year: 2.1% (as of 2026-10-01) | vs prior obs 2026-09-01: +0.0 | 3 mo trend: better | percentile in own history: 77
 - Real personal income ex-transfers, YoY: 0.5% (as of 2026-09-01) | vs prior obs 2026-08-01: -0.4 | 3 mo trend: worse | percentile in own history: 14 | STALE
-- Retail sales, year over year (nominal): 6.3% (as of 2026-09-01) | vs prior obs 2026-08-01: +0.7 | 3 mo trend: flat | percentile in own history: 80 | STALE
+- Retail sales, year over year (nominal): 6.8% (as of 2026-10-01) | vs prior obs 2026-09-01: +0.3 | 3 mo trend: better | percentile in own history: 82
 - Sahm rule recession indicator: 0.00 pp (as of 2026-10-01) | vs prior obs 2026-09-01: +0.00 | 3 mo trend: flat | percentile in own history: 47
 - GDPNow, current-quarter estimate: 3.5% (as of 2026-10-01) | vs prior obs 2026-07-01: +0.2 | 1 qtr trend: flat | percentile in own history: 75
 - Real GDP growth (annualized, latest quarter): 3.4% (as of 2026-07-01) | vs prior obs 2026-04-01: +1.2 | 1 qtr trend: better | percentile in own history: 70
