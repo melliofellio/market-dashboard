@@ -1,10 +1,10 @@
-MARKET DASHBOARD DIGEST. Data generated Wed Nov 18, 2026 07:55 PM CST (after close run). 46 indicators; 6 stale; 2 source failures.
+MARKET DASHBOARD DIGEST. Data generated Thu Nov 19, 2026 08:27 AM CST (morning catch-up run). 46 indicators; 6 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
 Stale: Consumer sentiment (U. Michigan) (last 2026-09-01); M2 money supply, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
 
 ## Market snapshot
 - S&P 500: 7,323.63 (as of 2026-11-18) | vs prior obs 2026-11-17: -0.23% | week-to-date -3.15% | week in progress | percentile in own history: 82 | From record high: -6.3% | Record close: 7,818.93 (2026-10-06)
-- Nasdaq Composite: 24,328.38 (as of 2026-11-17) | vs prior obs 2026-11-16: -0.74% | week-to-date -3.21% | week in progress | percentile in own history: 81
+- Nasdaq Composite: 24,429.88 (as of 2026-11-18) | vs prior obs 2026-11-17: +0.42% | week-to-date -2.81% | week in progress | percentile in own history: 81
 - Dow Jones Industrial: 50,198.17 (as of 2026-11-18) | vs prior obs 2026-11-17: -1.11% | week-to-date -4.11% | week in progress | percentile in own history: 84
 - 10-year Treasury yield: 5.07% (as of 2026-11-18) | vs prior obs 2026-11-17: -3 bp | week-to-date -8.00 bp | week in progress | percentile in own history: 97
 - 2-year Treasury yield: 4.80% (as of 2026-11-18) | vs prior obs 2026-11-17: +0 bp | week-to-date -8.00 bp | week in progress | percentile in own history: 92
@@ -15,7 +15,7 @@ Stale: Consumer sentiment (U. Michigan) (last 2026-09-01); M2 money supply, year
 - 30-yr mortgage rate: 7.11% (as of 2026-11-12) | vs prior obs 2026-11-05: -7 bp | percentile in own history: 91
 - US dollar (broad, trade-weighted): 122.65 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.09% | week-to-date +0.63% | week complete | percentile in own history: 73
 - WTI crude oil: $89.53 (as of 2026-11-17) | vs prior obs 2026-11-16: +0.33% | week-to-date -2.64% | week in progress | percentile in own history: 84
-- VIX (S&P 500 implied volatility): 25.46 (as of 2026-11-17) | vs prior obs 2026-11-16: +2.55 | week-to-date +6.16 | week in progress | percentile in own history: 95
+- VIX (S&P 500 implied volatility): 24.56 (as of 2026-11-18) | vs prior obs 2026-11-17: -0.90 | week-to-date +5.26 | week in progress | percentile in own history: 94
 - Bitcoin (USD): $62,982 (as of 2026-11-18) | vs prior obs 2026-11-17: -2.92% | week-to-date -3.57% | week in progress | percentile in own history: 4
 - Ethereum (USD): $1,775 (as of 2026-11-18) | vs prior obs 2026-11-17: -2.61% | week-to-date -3.27% | week in progress | percentile in own history: 9
 - Bitcoin vs 50-week MA, at the last weekly close: -14.5% (as of 2026-11-14) | vs prior obs 2026-11-07: -14.8 | percentile in own history: 67 | Latest daily close (2026-11-18) vs MA: -16.0% ($62,982) | 50-week MA: $75,000 | Last weekly close: $64,119 (2026-11-14)
@@ -29,7 +29,7 @@ Stale: Consumer sentiment (U. Michigan) (last 2026-09-01); M2 money supply, year
 - High-yield credit spread (OAS): 3.43% (as of 2026-11-17) | vs prior obs 2026-11-16: +9 bp | week-to-date +20.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 91
 - Investment-grade credit spread (OAS): 0.92% (as of 2026-11-17) | vs prior obs 2026-11-16: +2 bp | week-to-date +3.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 76
 - Financial conditions (Chicago Fed NFCI): -0.48 (as of 2026-11-13) | vs prior obs 2026-11-06: -0.01 | 4 wk trend: flat | percentile in own history: 35
-- Initial jobless claims: 200,000 (as of 2026-11-07) | vs prior obs 2026-10-31: +4.71% | 4 wk trend: flat | percentile in own history: 8
+- Initial jobless claims: 203,000 (as of 2026-11-14) | vs prior obs 2026-11-07: +0.49% | 4 wk trend: worse | percentile in own history: 13
 - Building permits (thousands, annualized): 1,295 (as of 2026-10-01) | vs prior obs 2026-09-01: -7.37% | 3 mo trend: worse | percentile in own history: 13
 - Consumer sentiment (U. Michigan): 48.1 (as of 2026-09-01) | vs prior obs 2026-08-01: -3.6 | 3 mo trend: flat | percentile in own history: 2 | STALE
 - M2 money supply, year over year: 5.7% (as of 2026-09-01) | vs prior obs 2026-08-01: +0.1 | 3 mo trend: flat | percentile in own history: 67 | STALE
