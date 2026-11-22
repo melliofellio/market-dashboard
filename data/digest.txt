@@ -1,4 +1,4 @@
-MARKET DASHBOARD DIGEST. Data generated Sat Nov 21, 2026 08:13 AM CST (morning catch-up run). 46 indicators; 5 stale; 2 source failures.
+MARKET DASHBOARD DIGEST. Data generated Sat Nov 21, 2026 07:50 PM CST (after close run). 46 indicators; 5 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
 Stale: M2 money supply, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
 
@@ -16,10 +16,10 @@ Stale: M2 money supply, year over year (last 2026-09-01); Real personal income e
 - US dollar (broad, trade-weighted): 122.65 (as of 2026-11-13) | vs prior obs 2026-11-12: +0.09% | week-to-date +0.63% | week complete | percentile in own history: 73
 - WTI crude oil: $89.53 (as of 2026-11-17) | vs prior obs 2026-11-16: +0.33% | week-to-date -2.64% | week in progress | percentile in own history: 84
 - VIX (S&P 500 implied volatility): 35.89 (as of 2026-11-20) | vs prior obs 2026-11-19: +7.45 | week-to-date +16.59 | week complete | percentile in own history: 99
-- Bitcoin (USD): $58,815 (as of 2026-11-20) | vs prior obs 2026-11-19: -5.00% | week-to-date -9.95% | week complete | percentile in own history: 0
-- Ethereum (USD): $1,619 (as of 2026-11-20) | vs prior obs 2026-11-19: -7.75% | week-to-date -11.73% | week complete | percentile in own history: 4
-- Bitcoin vs 50-week MA, at the last weekly close: -14.5% (as of 2026-11-14) | vs prior obs 2026-11-07: -14.8 | percentile in own history: 67 | Latest daily close (2026-11-20) vs MA: -21.6% ($58,815) | 50-week MA: $75,000 | Last weekly close: $64,119 (2026-11-14)
-- Gold (XAU/USD spot): $3,520.57 (as of 2026-11-20) | vs prior obs 2026-11-19: -3.99% | week-to-date -9.28% | week complete | percentile in own history: 22
+- Bitcoin (USD): $60,086 (as of 2026-11-21) | vs prior obs 2026-11-20: +2.16% | week-to-date -8.01% | week complete | percentile in own history: 1
+- Ethereum (USD): $1,682 (as of 2026-11-21) | vs prior obs 2026-11-20: +3.89% | week-to-date -8.30% | week complete | percentile in own history: 6
+- Bitcoin vs 50-week MA, at the last weekly close: -19.3% (as of 2026-11-21) | vs prior obs 2026-11-14: -4.7 | percentile in own history: 51 | Latest daily close (2026-11-21) vs MA: -19.3% ($60,086) | 50-week MA: $74,416 | Last weekly close: $60,086 (2026-11-21)
+- Gold (XAU/USD spot): $3,536.20 (as of 2026-11-21) | vs prior obs 2026-11-20: +0.44% | week-to-date -8.87% | week complete | percentile in own history: 22
 - Breadth proxy: equal-weight vs cap-weight (RSP/SPY): 0.3007 (as of 2026-11-20) | vs prior obs 2026-11-19: +1.72% | week-to-date +2.57% | week complete | percentile in own history: 90
 - Small caps vs large caps (IWM/SPY): 0.3720 (as of 2026-11-20) | vs prior obs 2026-11-19: +0.79% | week-to-date +1.11% | week complete | percentile in own history: 57
 
