@@ -1,4 +1,4 @@
-MARKET DASHBOARD DIGEST. Data generated Mon Nov 23, 2026 07:56 PM CST (after close run). 46 indicators; 6 stale; 2 source failures.
+MARKET DASHBOARD DIGEST. Data generated Tue Nov 24, 2026 08:30 AM CST (morning catch-up run). 46 indicators; 6 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
 Stale: WTI crude oil (last 2026-11-17); M2 money supply, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
 
@@ -15,7 +15,7 @@ Stale: WTI crude oil (last 2026-11-17); M2 money supply, year over year (last 20
 - 30-yr mortgage rate: 7.28% (as of 2026-11-19) | vs prior obs 2026-11-12: +17 bp | percentile in own history: 95
 - US dollar (broad, trade-weighted): 123.60 (as of 2026-11-20) | vs prior obs 2026-11-19: +0.06% | week-to-date +0.77% | week complete | percentile in own history: 81
 - WTI crude oil: $89.53 (as of 2026-11-17) | vs prior obs 2026-11-16: +0.33% | week-to-date -2.64% | week in progress | percentile in own history: 84 | STALE
-- VIX (S&P 500 implied volatility): 35.89 (as of 2026-11-20) | vs prior obs 2026-11-19: +7.45 | week-to-date +16.59 | week complete | percentile in own history: 99
+- VIX (S&P 500 implied volatility): 26.62 (as of 2026-11-23) | vs prior obs 2026-11-20: -9.27 | week-to-date -9.27 | week in progress | percentile in own history: 96
 - Bitcoin (USD): $61,190 (as of 2026-11-23) | vs prior obs 2026-11-22: +0.04% | week-to-date +0.04% | week in progress | percentile in own history: 2
 - Ethereum (USD): $1,708 (as of 2026-11-23) | vs prior obs 2026-11-22: -0.74% | week-to-date -0.74% | week in progress | percentile in own history: 7
 - Bitcoin vs 50-week MA, at the last weekly close: -19.3% (as of 2026-11-21) | vs prior obs 2026-11-14: -4.7 | percentile in own history: 51 | Latest daily close (2026-11-23) vs MA: -17.8% ($61,190) | 50-week MA: $74,416 | Last weekly close: $60,086 (2026-11-21)
