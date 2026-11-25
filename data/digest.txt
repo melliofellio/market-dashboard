@@ -1,47 +1,47 @@
-MARKET DASHBOARD DIGEST. Data generated Tue Nov 24, 2026 08:30 AM CST (morning catch-up run). 46 indicators; 6 stale; 2 source failures.
+MARKET DASHBOARD DIGEST. Data generated Tue Nov 24, 2026 07:59 PM CST (after close run). 46 indicators; 6 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
-Stale: WTI crude oil (last 2026-11-17); M2 money supply, year over year (last 2026-09-01); Real personal income ex-transfers, YoY (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
+Stale: Nasdaq Composite (last 2026-11-19); WTI crude oil (last 2026-11-17); Real personal income ex-transfers, YoY (last 2026-09-01); CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01); Core PCE, year over year (last 2026-09-01)
 
 ## Market snapshot
-- S&P 500: 6,910.39 (as of 2026-11-20) | vs prior obs 2026-11-19: -3.70% | week-to-date -8.61% | week complete | percentile in own history: 76 | From record high: -11.6% | Record close: 7,818.93 (2026-10-06)
-- Nasdaq Composite: 23,879.20 (as of 2026-11-19) | vs prior obs 2026-11-18: -2.25% | week-to-date -5.00% | week in progress | percentile in own history: 80
-- Dow Jones Industrial: 49,595.31 (as of 2026-11-23) | vs prior obs 2026-11-20: +3.01% | week-to-date +3.01% | week in progress | percentile in own history: 81
-- 10-year Treasury yield: 4.92% (as of 2026-11-23) | vs prior obs 2026-11-20: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 94
-- 2-year Treasury yield: 4.63% (as of 2026-11-23) | vs prior obs 2026-11-20: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 82
-- 4-week T-bill yield: 4.04% (as of 2026-11-20) | vs prior obs 2026-11-19: -1 bp | week-to-date +9.00 bp | week complete | percentile in own history: 38
-- Fed funds (effective): 3.88% (as of 2026-11-20) | vs prior obs 2026-11-19: +0 bp | week-to-date +0.00 bp | week complete | percentile in own history: 49
-- 10-year real yield (TIPS): 2.79% (as of 2026-11-23) | vs prior obs 2026-11-20: +2 bp | week-to-date +2.00 bp | week in progress | percentile in own history: 97
-- 10-year breakeven inflation: 2.13% (as of 2026-11-23) | vs prior obs 2026-11-20: -2 bp | week-to-date -2.00 bp | week in progress | percentile in own history: 4
+- S&P 500: 7,237.17 (as of 2026-11-23) | vs prior obs 2026-11-20: +4.73% | week-to-date +4.73% | week in progress | percentile in own history: 82 | From record high: -7.4% | Record close: 7,818.93 (2026-10-06)
+- Nasdaq Composite: 23,879.20 (as of 2026-11-19) | vs prior obs 2026-11-18: -2.25% | week-to-date -5.00% | week in progress | percentile in own history: 80 | STALE
+- Dow Jones Industrial: 50,018.70 (as of 2026-11-24) | vs prior obs 2026-11-23: +0.85% | week-to-date +3.89% | week in progress | percentile in own history: 83
+- 10-year Treasury yield: 4.91% (as of 2026-11-24) | vs prior obs 2026-11-23: -1 bp | week-to-date -1.00 bp | week in progress | percentile in own history: 94
+- 2-year Treasury yield: 4.63% (as of 2026-11-24) | vs prior obs 2026-11-23: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 82
+- 4-week T-bill yield: 4.04% (as of 2026-11-23) | vs prior obs 2026-11-20: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 38
+- Fed funds (effective): 3.88% (as of 2026-11-23) | vs prior obs 2026-11-22: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 50
+- 10-year real yield (TIPS): 2.79% (as of 2026-11-24) | vs prior obs 2026-11-23: +0 bp | week-to-date +2.00 bp | week in progress | percentile in own history: 97
+- 10-year breakeven inflation: 2.12% (as of 2026-11-24) | vs prior obs 2026-11-23: -1 bp | week-to-date -3.00 bp | week in progress | percentile in own history: 4
 - 30-yr mortgage rate: 7.28% (as of 2026-11-19) | vs prior obs 2026-11-12: +17 bp | percentile in own history: 95
 - US dollar (broad, trade-weighted): 123.60 (as of 2026-11-20) | vs prior obs 2026-11-19: +0.06% | week-to-date +0.77% | week complete | percentile in own history: 81
 - WTI crude oil: $89.53 (as of 2026-11-17) | vs prior obs 2026-11-16: +0.33% | week-to-date -2.64% | week in progress | percentile in own history: 84 | STALE
 - VIX (S&P 500 implied volatility): 26.62 (as of 2026-11-23) | vs prior obs 2026-11-20: -9.27 | week-to-date -9.27 | week in progress | percentile in own history: 96
-- Bitcoin (USD): $61,190 (as of 2026-11-23) | vs prior obs 2026-11-22: +0.04% | week-to-date +0.04% | week in progress | percentile in own history: 2
-- Ethereum (USD): $1,708 (as of 2026-11-23) | vs prior obs 2026-11-22: -0.74% | week-to-date -0.74% | week in progress | percentile in own history: 7
-- Bitcoin vs 50-week MA, at the last weekly close: -19.3% (as of 2026-11-21) | vs prior obs 2026-11-14: -4.7 | percentile in own history: 51 | Latest daily close (2026-11-23) vs MA: -17.8% ($61,190) | 50-week MA: $74,416 | Last weekly close: $60,086 (2026-11-21)
-- Gold (XAU/USD spot): $3,643.42 (as of 2026-11-23) | vs prior obs 2026-11-22: +3.13% | week-to-date +3.13% | week in progress | percentile in own history: 24
-- Breadth proxy: equal-weight vs cap-weight (RSP/SPY): 0.2946 (as of 2026-11-23) | vs prior obs 2026-11-20: -2.02% | week-to-date -2.02% | week in progress | percentile in own history: 76
-- Small caps vs large caps (IWM/SPY): 0.3679 (as of 2026-11-23) | vs prior obs 2026-11-20: -1.10% | week-to-date -1.10% | week in progress | percentile in own history: 50
+- Bitcoin (USD): $59,741 (as of 2026-11-24) | vs prior obs 2026-11-23: -2.37% | week-to-date -2.33% | week in progress | percentile in own history: 1
+- Ethereum (USD): $1,678 (as of 2026-11-24) | vs prior obs 2026-11-23: -1.81% | week-to-date -2.54% | week in progress | percentile in own history: 6
+- Bitcoin vs 50-week MA, at the last weekly close: -19.3% (as of 2026-11-21) | vs prior obs 2026-11-14: -4.7 | percentile in own history: 51 | Latest daily close (2026-11-24) vs MA: -19.7% ($59,741) | 50-week MA: $74,416 | Last weekly close: $60,086 (2026-11-21)
+- Gold (XAU/USD spot): $3,556.26 (as of 2026-11-24) | vs prior obs 2026-11-23: -2.39% | week-to-date +0.66% | week in progress | percentile in own history: 22
+- Breadth proxy: equal-weight vs cap-weight (RSP/SPY): 0.2977 (as of 2026-11-24) | vs prior obs 2026-11-23: +1.03% | week-to-date -1.01% | week in progress | percentile in own history: 86
+- Small caps vs large caps (IWM/SPY): 0.3717 (as of 2026-11-24) | vs prior obs 2026-11-23: +1.02% | week-to-date -0.09% | week in progress | percentile in own history: 56
 
 ## Leading indicators
-- Yield curve: 10-yr minus 3-month: 0.55 pp (as of 2026-11-23) | vs prior obs 2026-11-20: -5 bp | week-to-date -5.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 76
-- Yield curve: 10-yr minus 2-year: 0.29 pp (as of 2026-11-23) | vs prior obs 2026-11-20: +0 bp | week-to-date +0.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 43
-- High-yield credit spread (OAS): 3.76% (as of 2026-11-20) | vs prior obs 2026-11-19: +24 bp | week-to-date +53.00 bp | week complete | 4 wk trend: worse | percentile in own history: 98
-- Investment-grade credit spread (OAS): 0.98% (as of 2026-11-20) | vs prior obs 2026-11-19: +4 bp | week-to-date +9.00 bp | week complete | 4 wk trend: worse | percentile in own history: 90
+- Yield curve: 10-yr minus 3-month: 0.55 pp (as of 2026-11-24) | vs prior obs 2026-11-23: +0 bp | week-to-date -5.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 76
+- Yield curve: 10-yr minus 2-year: 0.28 pp (as of 2026-11-24) | vs prior obs 2026-11-23: -1 bp | week-to-date -1.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 42
+- High-yield credit spread (OAS): 3.63% (as of 2026-11-23) | vs prior obs 2026-11-20: -13 bp | week-to-date -13.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 96
+- Investment-grade credit spread (OAS): 0.97% (as of 2026-11-23) | vs prior obs 2026-11-20: -1 bp | week-to-date -1.00 bp | week in progress | 4 wk trend: worse | percentile in own history: 88
 - Financial conditions (Chicago Fed NFCI): -0.48 (as of 2026-11-13) | vs prior obs 2026-11-06: -0.01 | 4 wk trend: flat | percentile in own history: 35
 - Initial jobless claims: 203,000 (as of 2026-11-14) | vs prior obs 2026-11-07: +0.49% | 4 wk trend: worse | percentile in own history: 13
 - Building permits (thousands, annualized): 1,295 (as of 2026-10-01) | vs prior obs 2026-09-01: -7.37% | 3 mo trend: worse | percentile in own history: 13
 - Consumer sentiment (U. Michigan): 48.0 (as of 2026-10-01) | vs prior obs 2026-09-01: -0.1 | 3 mo trend: worse | percentile in own history: 2
-- M2 money supply, year over year: 5.7% (as of 2026-09-01) | vs prior obs 2026-08-01: +0.1 | 3 mo trend: flat | percentile in own history: 67 | STALE
+- M2 money supply, year over year: 5.9% (as of 2026-10-01) | vs prior obs 2026-09-01: +0.2 | 3 mo trend: flat | percentile in own history: 68
 - Bank reserves at the Fed: $2,980B (as of 2026-11-18) | vs prior obs 2026-11-11: +0.64% | 4 wk trend: flat | percentile in own history: 14
-- Reverse repo facility (overnight): $0B (as of 2026-11-23) | vs prior obs 2026-11-20: -0.1 | week-to-date -0.05 | week in progress | percentile in own history: 7
+- Reverse repo facility (overnight): $0B (as of 2026-11-24) | vs prior obs 2026-11-23: -0.0 | week-to-date -0.10 | week in progress | percentile in own history: 6
 - Net liquidity (Fed assets - Treasury cash - reverse repo): $5,825B (as of 2026-11-18) | vs prior obs 2026-11-11: -0.34% | 4 wk trend: flat | percentile in own history: 25
-- Policy expectations: 2-yr yield minus Fed funds: 0.75 pp (as of 2026-11-23) | vs prior obs 2026-11-20: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 94
-- Treasury volatility: 20-day std of 10-yr daily moves (bp): 5.6 (as of 2026-11-23) | vs prior obs 2026-11-20: -0.1 | week-to-date -0.08 | week in progress | 4 wk trend: flat | percentile in own history: 73
+- Policy expectations: 2-yr yield minus Fed funds: 0.75 pp (as of 2026-11-24) | vs prior obs 2026-11-23: +0 bp | week-to-date +0.00 bp | week in progress | percentile in own history: 94
+- Treasury volatility: 20-day std of 10-yr daily moves (bp): 5.6 (as of 2026-11-24) | vs prior obs 2026-11-23: +0.0 | week-to-date -0.08 | week in progress | 4 wk trend: flat | percentile in own history: 73
 
 ## Coincident indicators
 - Nonfarm payrolls, monthly change (thousands): 165 (as of 2026-10-01) | vs prior obs 2026-09-01: +105.0 | 3 mo trend: better | percentile in own history: 45
-- Industrial production, year over year: 2.1% (as of 2026-10-01) | vs prior obs 2026-09-01: +0.0 | 3 mo trend: better | percentile in own history: 77
+- Industrial production, year over year: 1.7% (as of 2026-10-01) | vs prior obs 2026-09-01: -0.0 | 3 mo trend: better | percentile in own history: 72
 - Real personal income ex-transfers, YoY: 0.5% (as of 2026-09-01) | vs prior obs 2026-08-01: -0.4 | 3 mo trend: worse | percentile in own history: 14 | STALE
 - Retail sales, year over year (nominal): 6.8% (as of 2026-10-01) | vs prior obs 2026-09-01: +0.3 | 3 mo trend: better | percentile in own history: 82
 - Sahm rule recession indicator: 0.00 pp (as of 2026-10-01) | vs prior obs 2026-09-01: +0.00 | 3 mo trend: flat | percentile in own history: 47
@@ -57,7 +57,6 @@ Stale: WTI crude oil (last 2026-11-17); M2 money supply, year over year (last 20
 - Commercial & industrial loans, year over year: 11.9% (as of 2026-11-11) | vs prior obs 2026-11-04: +0.8 | percentile in own history: 89
 
 ## Upcoming releases (next 30 days)
-- 2026-11-24: Industrial production
 - 2026-11-25: GDP
 - 2026-11-25: PCE inflation and income
 - 2026-12-01: JOLTS job openings
