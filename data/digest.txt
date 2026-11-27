@@ -1,4 +1,4 @@
-MARKET DASHBOARD DIGEST. Data generated Thu Nov 26, 2026 07:59 PM CST (after close run). 46 indicators; 2 stale; 2 source failures.
+MARKET DASHBOARD DIGEST. Data generated Fri Nov 27, 2026 08:29 AM CST (morning catch-up run). 46 indicators; 2 stale; 2 source failures.
 Each indicator has its own as-of date. Week-to-date is measured from the prior week's last observation.
 Stale: CPI, year over year (last 2026-09-01); Core CPI, year over year (last 2026-09-01)
 
@@ -15,7 +15,7 @@ Stale: CPI, year over year (last 2026-09-01); Core CPI, year over year (last 202
 - 30-yr mortgage rate: 7.21% (as of 2026-11-25) | vs prior obs 2026-11-19: -7 bp | percentile in own history: 93
 - US dollar (broad, trade-weighted): 123.60 (as of 2026-11-20) | vs prior obs 2026-11-19: +0.06% | week-to-date +0.77% | week complete | percentile in own history: 81
 - WTI crude oil: $82.24 (as of 2026-11-24) | vs prior obs 2026-11-23: +1.01% | week-to-date -6.11% | week in progress | percentile in own history: 74
-- VIX (S&P 500 implied volatility): 28.29 (as of 2026-11-25) | vs prior obs 2026-11-24: +1.93 | week-to-date -7.60 | week in progress | percentile in own history: 97
+- VIX (S&P 500 implied volatility): 26.80 (as of 2026-11-26) | vs prior obs 2026-11-25: -1.49 | week-to-date -9.09 | week in progress | percentile in own history: 96
 - Bitcoin (USD): $60,496 (as of 2026-11-26) | vs prior obs 2026-11-25: +0.19% | week-to-date -1.09% | week in progress | percentile in own history: 2
 - Ethereum (USD): $1,688 (as of 2026-11-26) | vs prior obs 2026-11-25: -0.16% | week-to-date -1.96% | week in progress | percentile in own history: 6
 - Bitcoin vs 50-week MA, at the last weekly close: -19.3% (as of 2026-11-21) | vs prior obs 2026-11-14: -4.7 | percentile in own history: 50 | Latest daily close (2026-11-26) vs MA: -18.7% ($60,496) | 50-week MA: $74,416 | Last weekly close: $60,086 (2026-11-21)
